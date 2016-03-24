@@ -1,0 +1,21 @@
+{
+  "name": "validation",
+  "authors": [
+    "hans <hayashi0126@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sprintf": "^1.0.3"
+  }
+}

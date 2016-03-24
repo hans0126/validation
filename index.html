@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="ttt">
+    <div id="ccc" style="color:#F00"></div>
+    <button id="btn" type="button">Validate</button>
+    <input type="radio" name="rr" value="A">
+    <input type="radio" name="rr" value="B">
+    <div id="ra"></div>
+    <script src="bower_components/sprintf/dist/sprintf.min.js"></script>
+    <script src="js/validation.js"></script>
+    <script>
+
+ 
+    var rr = document.getElementsByName("rr");   
+    var btn = document.getElementById("btn");
+    btn.onclick = function() {
+        v.startValidate(function() {
+            console.log(v.hasError);
+        });
+
+    }
+
+    var v = new validate();
+
+    v.addRule({
+    	ruleName:"test",
+    	ruleFn:function(_val,_val2){
+    		console.log(_val);
+    		console.log(_val2);
+
+    		return false;
+    	},
+    	errorMsg:"%s 測試測試 %s"
+    })
+
+    v.addInput({
+        element: document.getElementsByName("rr"),
+        reElement: document.getElementById("ra"),
+        display: "性別欄位"
+    })
+
+    v.addInput({
+        element: document.getElementsByName("ttt"),
+        display: "test input",
+        rules: "required|test[10]",
+        reElement: document.getElementById("ccc"),
+        click: function(_validate) {
+            var _self = this; // current object
+            this.element.onblur = function() {
+                _validate(_self);
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
