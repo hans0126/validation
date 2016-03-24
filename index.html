@@ -4,9 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 
 <body>
+    <div class="container">
+        <form>
+			 <div class="form-group">
+                <label class="col-sm-2 control-label">User ID</label>
+                <div class="col-sm-10">
+                    <input type="text" name="userId" class="form-control" placeholder="User ID">
+                    <p class="bg-danger" id="reUserId"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">TW ID</label>
+                <div class="col-sm-10">
+                    <input type="text" name="twid" class="form-control" placeholder="ID">
+                    <p class="bg-danger" id="reTwid"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Email address</label>
+                <div class="col-sm-10">
+                    <input type="email" name="mail" class="form-control" placeholder="Email">
+                    <p class="bg-danger" id="reMail"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Gender</label>
+                <div class="col-sm-10">
+                    <label class="radio-inline">
+                        <input type="radio" name="gender"> Boy
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="gender"> Girl
+                    </label>
+                    <p class="bg-danger" id="reGender"></p>
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <button class="btn btn-primary" type="button" id="submin">Submin</button>
+            </div>
+        </form>
+    </div>
     <input type="text" name="ttt">
     <div id="ccc" style="color:#F00"></div>
     <button id="btn" type="button">Validate</button>
@@ -16,48 +58,74 @@
     <script src="bower_components/sprintf/dist/sprintf.min.js"></script>
     <script src="js/validation.js"></script>
     <script>
-
- 
-    var rr = document.getElementsByName("rr");   
-    var btn = document.getElementById("btn");
+    var btn = document.getElementById("submin");
     btn.onclick = function() {
         v.startValidate(function() {
             console.log(v.hasError);
         });
+
+        return false;
 
     }
 
     var v = new validate();
 
     v.addRule({
-    	ruleName:"test",
-    	ruleFn:function(_val,_val2){
-    		console.log(_val);
-    		console.log(_val2);
+        ruleName: "test",
+        ruleFn: function(_val, _val2) {
+            console.log(_val);
+            console.log(_val2);
 
-    		return false;
-    	},
-    	errorMsg:"%s 測試測試 %s"
+            return false;
+        },
+        errorMsg: "%s 測試測試 %s"
+    })
+
+
+     v.addInput({
+        element: document.getElementsByName("twid"),
+        reElement: document.getElementById("reTwid"),
+        display: "TW ID",
+        rules: "required|twID"
+    })
+
+
+    v.addInput({
+        element: document.getElementsByName("gender"),
+        reElement: document.getElementById("reGender"),
+        display: "Gender"
     })
 
     v.addInput({
-        element: document.getElementsByName("rr"),
-        reElement: document.getElementById("ra"),
-        display: "性別欄位"
+        element: document.getElementsByName("mail"),
+        display: "Email Address",
+        rules: "required|mail",
+        reElement: document.getElementById("reMail")
     })
 
-    v.addInput({
-        element: document.getElementsByName("ttt"),
-        display: "test input",
-        rules: "required|test[10]",
-        reElement: document.getElementById("ccc"),
-        click: function(_validate) {
+
+     v.addInput({
+        element: document.getElementsByName("userId"),
+        display: "User Id",
+        rules: "required|mail",
+        reElement: document.getElementById("reUserId"),
+        blur:function(){
+        	var this = _self;
+        	this.onblur = function(){
+        		console.log(this.value);
+        	}
+
+
+        }
+    })
+
+
+    /*  click: function(_validate) {
             var _self = this; // current object
             this.element.onblur = function() {
                 _validate(_self);
             }
-        }
-    })
+        }*/
     </script>
 </body>
 

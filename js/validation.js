@@ -68,7 +68,7 @@ function validate(_obj) {
         mail: "%s 欄位格式不符",
         max: "%s 字數不能超過 %s",
         min: "%s 字數不能少於 %s",
-        twID: "%s 身分證欄位錯誤",
+        twID: "%s 欄位格式錯誤",
         numeric: "%s 欄位須為數值"
     }
 
