@@ -10,9 +10,9 @@ function validate(_obj) {
 
     //  element: dom element //by name
     //  display: field name
-    //  rules: required|matches[password]
+    //  rules: required|matches[password]    
+    //	reElement: error result , get element by id
     //  any function name : function
-    //	reElement: error result , get element by id    
 
     _self.inputs = [];
     _self.hasError = false;
@@ -78,7 +78,15 @@ function validate(_obj) {
             _obj.reElement.innerHTML = "";
         }
 
-        switch (_obj.element[0].getAttribute("type").toLowerCase()) {
+        var inputType;
+
+        if(_obj.element[0].tagName.toLowerCase() =="textarea"){
+        	inputType = _obj.element[0].tagName.toLowerCase();
+        }else{
+        	inputType = _obj.element[0].getAttribute("type").toLowerCase()
+        }
+
+        switch (inputType) {
             case "radio":
             case "checkbox":
                 var _hasCheck = false;
@@ -146,7 +154,7 @@ function validate(_obj) {
     }
 
     function mail(_val) {
-        var reg = new RegExp("^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
+        var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
         if (!_val) {
             return true;
@@ -229,8 +237,5 @@ function validate(_obj) {
             return true;
         }
     }
-
-
-
 
 }
