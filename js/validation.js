@@ -11,7 +11,7 @@ function validate(_obj) {
     //  element: dom element //by name
     //  display: field name
     //  rules: required|matches[password]    
-    //	reElement: error result , get element by id
+    //  reElement: error result , get element by id
     //  any function name : function
 
     _self.inputs = [];
@@ -78,12 +78,16 @@ function validate(_obj) {
             _obj.reElement.innerHTML = "";
         }
 
+        if (_obj.element[0].offsetParent === null) {
+            return
+        }
+
         var inputType;
 
-        if(_obj.element[0].tagName.toLowerCase() =="textarea"){
-        	inputType = _obj.element[0].tagName.toLowerCase();
-        }else{
-        	inputType = _obj.element[0].getAttribute("type").toLowerCase()
+        if (_obj.element[0].tagName.toLowerCase() == "textarea") {
+            inputType = _obj.element[0].tagName.toLowerCase();
+        } else {
+            inputType = _obj.element[0].getAttribute("type").toLowerCase()
         }
 
         switch (inputType) {
